@@ -10,10 +10,22 @@ var User = require('./User');
 // CREATES A NEW USER
 router.post('/', function (req, res) {
     User.create({
-            name : req.body.name,
-            email : req.body.email,
-            age : req.body.age,
-            password : req.body.password
+            employee_id: req.body.employee_id,
+            name: req.body.name,
+            name_en: req.body.name_en,
+            nickmane: req.body.nickmane,
+            birth_date: req.body.birth_date,
+            position: req.body.position,
+            team: req.body.team,
+            email: req.body.email,
+            phone: req.body.phone,
+            shirt_size: req.body.shirt_size,
+            facebook_id: req.body.facebook_id,
+            line_id: req.body.line_id,
+            instagram_id: req.body.instagram_id,
+            profile_image: req.body.profile_image,
+            cover_image: req.body.cover_image,
+            password: req.body.password
         }, 
         function (err, user) {
             if (err) return res.status(500).send("There was a problem adding the information to the database.");
