@@ -11,8 +11,10 @@ var User = require('./User');
 router.post('/', function (req, res) {
     User.create({
             employee_id: req.body.employee_id,
-            name: req.body.name,
-            name_en: req.body.name_en,
+            firstname: req.body.firstname,
+            firstname_en: req.body.firstname_en,
+            lastname: req.body.lastname,
+            lastname_en: req.body.lastname_en,
             nickmane: req.body.nickmane,
             birth_date: req.body.birth_date,
             position: req.body.position,

@@ -2,8 +2,10 @@
 var mongoose = require('mongoose');  
 var UserSchema = new mongoose.Schema({  
   employee_id: String,
-  name: String,
-  name_en: String,
+  firstname: String,
+  firstname_en: String,
+  lastname: String,
+  lastname_en: String,
   nickmane: String,
   birth_date: Date,
   position: String,
