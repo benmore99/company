@@ -4,12 +4,13 @@ var express = require('express');
 var multer = require('multer');
 var router = express.Router();
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
 var User = require('./User');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/')
+    cb(null, 'user/uploads/')
   },
   filename: function (req, file, cb) {
     let extArray = file.mimetype.split("/");
@@ -97,12 +98,34 @@ router.post('/upload_profile_image/:id', upload.single('profile_image'), functio
     // let extension = extArray[extArray.length - 1];
     // var profile_image = req.file.path + "." + extension;
 
-    let image_path = { profile_image: req.file.path };
+    let image_path = { profile_image: "users/uploads/" + req.file.filename };
 
     User.findByIdAndUpdate(req.params.id, image_path , {new: true}, function (err, user) {
         if (err) return res.status(500).send("There was a problem updating the user.");
         res.status(200).send(user);
     });
+})
+
+router.get('/uploads/:name', function (req, res, next) {
+
+    var options = {
+    root: __dirname + '/uploads/',
+    dotfiles: 'deny',
+    headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+    };
+
+    var fileName = req.params.name;
+    res.sendFile(fileName, options, function (err) {
+    if (err) {
+      next(err);
+    } else {
+      console.log('Sent:', fileName);
+    }
+  });
+
 })
 
 
